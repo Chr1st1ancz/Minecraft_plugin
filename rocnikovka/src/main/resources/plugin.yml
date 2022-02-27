@@ -1,0 +1,4 @@
+name: Rocnikovka
+version: '${project.version}'
+main: cz.christian.rocnikovka.Rocnikovka
+api-version: 1.18

@@ -1,0 +1,4 @@
+name: Rocnikovka
+version: '1.0'
+main: cz.christian.rocnikovka.Rocnikovka
+api-version: 1.18
