@@ -2,5 +2,13 @@ name: Rocnikovka
 version: '${project.version}'
 main: cz.christian.rocnikovka.Rocnikovka
 api-version: 1.18
+
 commands:
+  pluginEnable:
+    description: Zapne plugin
+    usage: /pluginEnable
+
+  storyEnable:
+    description: Zapne příběh
+    usage: /storyEnable
 

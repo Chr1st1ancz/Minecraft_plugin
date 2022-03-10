@@ -1,3 +1,6 @@
 cz\christian\rocnikovka\Rocnikovka.class
+cz\christian\rocnikovka\TeleportWhenEnemyHit.class
+cz\christian\rocnikovka\FoundStronghold.class
+cz\christian\rocnikovka\JoinEvent.class
+cz\christian\rocnikovka\Story.class
 cz\christian\rocnikovka\KoordinaceHrace.class
-cz\christian\rocnikovka\Prikazy.class
