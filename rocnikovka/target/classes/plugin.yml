@@ -12,3 +12,6 @@ commands:
     description: Zapne příběh
     usage: /storyEnable
 
+  reloadPlugin:
+    description: Reloadne plugin
+    usage: /reloadPlugin

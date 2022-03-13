@@ -1,4 +1,5 @@
 cz\christian\rocnikovka\Rocnikovka.class
+cz\christian\rocnikovka\ReloadPlugin.class
 cz\christian\rocnikovka\TeleportWhenEnemyHit.class
 cz\christian\rocnikovka\FoundStronghold.class
 cz\christian\rocnikovka\JoinEvent.class

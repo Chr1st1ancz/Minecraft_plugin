@@ -10,7 +10,7 @@ import static org.bukkit.StructureType.STRONGHOLD;
 
 public class KoordinaceHrace implements Listener {
    private double moving = 0;
-   private boolean foundStronghold = false;
+   public boolean foundStronghold = false;
    private Location tempLocation = null;
     @EventHandler
     public void whenPlayerMoves(PlayerMoveEvent event){
@@ -24,10 +24,11 @@ public class KoordinaceHrace implements Listener {
                     if(currlocation.distance(structure) > 300){
                         if(tempLocation == null){
                             tempLocation = currlocation;
+                            player.sendMessage("Každých 50 bloků se ti do chatu zobrazí, jestli jsi se přiblížil nebo ne");
                         }
                     if(tempLocation.distance(structure) > currlocation.distance(structure)){
-                        player.sendMessage("Přihořívá");
-                        tempLocation = currlocation;
+                            player.sendMessage("Přihořívá");
+                            tempLocation = currlocation;
                     }
                     else if((tempLocation.distance(structure) < currlocation.distance(structure))){
                         player.sendMessage("Samá voda");
@@ -41,7 +42,8 @@ public class KoordinaceHrace implements Listener {
                         if(currlocation.distance(structure) < 100 && foundStronghold == false){
                             player.sendMessage("Kopej! Je někde pod tebou");
                             foundStronghold = true;
-                            new FoundStronghold();
+                          //  new FoundStronghold();
+
                         }
                     }
                 }

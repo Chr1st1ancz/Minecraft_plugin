@@ -16,14 +16,15 @@ public final class Rocnikovka extends JavaPlugin implements CommandExecutor, Lis
         getLogger().info("Plugin se zapnul");
         getServer().getPluginManager().registerEvents(new JoinEvent(), this);
         this.getCommand("storyEnable").setExecutor(new Story());
+        this.getCommand("reloadPlugin").setExecutor(new ReloadPlugin());
     }
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(!isOn) {
             Player player = (Player) sender;
             player.sendMessage("Plugin se zapl");
-            getServer().getPluginManager().registerEvents(new TeleportWhenEnemyHit(), this);
             getServer().getPluginManager().registerEvents(new KoordinaceHrace(), this);
+            getServer().getPluginManager().registerEvents(new TeleportWhenEnemyHit(), this);
             isOn = true;
             return true;
         }
