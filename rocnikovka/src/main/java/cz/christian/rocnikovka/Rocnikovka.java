@@ -10,13 +10,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class Rocnikovka extends JavaPlugin implements CommandExecutor, Listener {
 
     private boolean isOn = false;
-
+    private static Rocnikovka instance;
     @Override
-    public void onEnable() {
+            public void onEnable(){
+        instance = this;
         getLogger().info("Plugin se zapnul");
         getServer().getPluginManager().registerEvents(new JoinEvent(), this);
         this.getCommand("storyEnable").setExecutor(new Story());
         this.getCommand("reloadPlugin").setExecutor(new ReloadPlugin());
+    }
+    public static Rocnikovka getInstance(){
+        return instance;
     }
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -24,10 +28,13 @@ public final class Rocnikovka extends JavaPlugin implements CommandExecutor, Lis
             Player player = (Player) sender;
             player.sendMessage("Plugin se zapl");
             getServer().getPluginManager().registerEvents(new KoordinaceHrace(), this);
+            getServer().getPluginManager().registerEvents(new FoundStronghold(),this);
             getServer().getPluginManager().registerEvents(new TeleportWhenEnemyHit(), this);
+
             isOn = true;
             return true;
-        }
+
+            }
         else{
             return false;
         }

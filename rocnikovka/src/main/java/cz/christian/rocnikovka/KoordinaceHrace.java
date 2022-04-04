@@ -1,7 +1,10 @@
 package cz.christian.rocnikovka;
 
 import org.bukkit.Location;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -42,8 +45,8 @@ public class KoordinaceHrace implements Listener {
                         if(currlocation.distance(structure) < 100 && foundStronghold == false){
                             player.sendMessage("Kopej! Je někde pod tebou");
                             foundStronghold = true;
-                          //  new FoundStronghold();
-
+                            Entity ent = player.getWorld().spawnEntity(player.getLocation(), EntityType.ZOMBIE);
+                            ((Zombie) ent).setHealth(20);
                         }
                     }
                 }

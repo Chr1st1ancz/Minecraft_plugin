@@ -1,5 +1,6 @@
 package cz.christian.rocnikovka;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -8,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import cz.christian.rocnikovka.KoordinaceHrace;
+import org.bukkit.scheduler.BukkitTask;
 
 import static org.bukkit.StructureType.STRONGHOLD;
 
@@ -21,22 +23,26 @@ public class TeleportWhenEnemyHit implements Listener {
         Player player = (Player) entity;
         Location currlocation = player.getLocation();
         Location structure = player.getWorld().locateNearestStructure(player.getLocation(), STRONGHOLD, 50000, true);
-        if (currlocation.distance(structure) > 100 && oneTimeMsg == false) {
-
+        if (currlocation.distance(structure) > 100 && !oneTimeMsg) {
             if (entity instanceof Player) {
                 Location newlocation = currlocation.add(Math.random() * 100, 0, Math.random() * 100);
                 Block Yheight = player.getWorld().getHighestBlockAt(newlocation);
                 newlocation.setY(Yheight.getY() + 1);
                 player.teleport(newlocation);
 
-                if (msgtype == true) {
+                if (msgtype) {
                     player.sendMessage("Byl jsi hitnut enemy, teleportuju na random místo");
-                } else if (!msgtype) {
+                } else {
                     player.sendMessage("Zapomněl jsem říct, že hit od enemy tě teleportuje na náhodné místo :)");
                     msgtype = true;
                 }
 
+
             }
+            else {
+                Bukkit.getServer().getConsoleSender().sendMessage("Hráč hitl enemy");
+            }
+
         }
         else {
             if (!oneTimeMsg) {

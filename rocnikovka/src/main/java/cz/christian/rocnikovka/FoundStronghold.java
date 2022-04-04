@@ -4,39 +4,24 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.player.PlayerEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
-
-public class FoundStronghold extends KoordinaceHrace implements Listener {
-    private int entityCount = 0;
+public class FoundStronghold implements Listener {
     private int overallCount = 0;
-    private boolean mobSpawn = false;
-
     @EventHandler
-    public void foundStronghold(PlayerMoveEvent event){
-        if(foundStronghold) {
-            while (overallCount < 12) {
-                Player player = (Player) event;
-                if (!mobSpawn) {
-                    Entity ent = player.getWorld().spawnEntity(player.getLocation(), EntityType.ZOMBIE);
-                    ((Zombie) ent).setHealth(1000);
-                    mobSpawn = true;
-                    entityCount = 0;
-                }
-                if (entityCount == 1) {
-                    mobSpawn = false;
-                }
+    public void entityDeath(EntityDeathEvent event) {
+        Entity killer = event.getEntity().getKiller();
+        Entity entity = event.getEntity();
+        if (killer instanceof Player){
+
+            if (overallCount < 11) {
+                overallCount++;
+                entity.sendMessage("Zabil jsi enemy!" + (10 - overallCount) + " zbývá");
+                Entity ent = entity.getWorld().spawnEntity(entity.getLocation(), EntityType.ZOMBIE);
+                ((Zombie) ent).setHealth(20);
             }
+            entity.sendMessage("Zabil jsi všechny, rychle, zakopej se do Strongholdu, najdi portál a stoupni si na něj.");
         }
-
-
-    }
-    @EventHandler
-    public void entityDeath(EntityDeathEvent event){
-        Player player = (Player) event;
-        entityCount++;
-        overallCount++;
-        player.sendMessage("Zabil jsi enemy!" + (10-overallCount) + " zbývá");
-
-    }
+        }
 }
+
+
+
