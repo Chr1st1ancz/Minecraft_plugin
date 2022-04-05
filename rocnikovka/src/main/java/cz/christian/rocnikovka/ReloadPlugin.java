@@ -13,7 +13,6 @@ public class ReloadPlugin implements CommandExecutor{
         player.teleport(Bukkit.getServer().getWorld("world").getSpawnLocation());
         Bukkit.reload();
         Bukkit.getServer().reloadData();
-
             player.sendMessage("Plugin se restartoval. Napiš /pluginEnable pro zapnutí.");
         return true;
     }

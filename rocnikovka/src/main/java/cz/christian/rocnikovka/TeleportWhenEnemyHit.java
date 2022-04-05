@@ -20,16 +20,15 @@ public class TeleportWhenEnemyHit implements Listener {
     @EventHandler
     public void onPlayerDamage(EntityDamageByEntityEvent event) {
         Entity entity = event.getEntity();
-        Player player = (Player) entity;
+        Player player = (Player) event.getEntity();
         Location currlocation = player.getLocation();
         Location structure = player.getWorld().locateNearestStructure(player.getLocation(), STRONGHOLD, 50000, true);
-        if (currlocation.distance(structure) > 100 && !oneTimeMsg) {
+        if (currlocation.distance(structure) > 120 && !oneTimeMsg) {
             if (entity instanceof Player) {
                 Location newlocation = currlocation.add(Math.random() * 100, 0, Math.random() * 100);
                 Block Yheight = player.getWorld().getHighestBlockAt(newlocation);
                 newlocation.setY(Yheight.getY() + 1);
                 player.teleport(newlocation);
-
                 if (msgtype) {
                     player.sendMessage("Byl jsi hitnut enemy, teleportuju na random místo");
                 } else {
@@ -38,8 +37,7 @@ public class TeleportWhenEnemyHit implements Listener {
                 }
 
 
-            }
-            else {
+            } else if(event.getDamager() instanceof Player) {
                 Bukkit.getServer().getConsoleSender().sendMessage("Hráč hitl enemy");
             }
 

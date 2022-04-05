@@ -16,8 +16,7 @@ public final class Rocnikovka extends JavaPlugin implements CommandExecutor, Lis
         instance = this;
         getLogger().info("Plugin se zapnul");
         getServer().getPluginManager().registerEvents(new JoinEvent(), this);
-        this.getCommand("storyEnable").setExecutor(new Story());
-        this.getCommand("reloadPlugin").setExecutor(new ReloadPlugin());
+        getServer().getPluginManager().registerEvents(new InventorySetUp(),this);
     }
     public static Rocnikovka getInstance(){
         return instance;
@@ -26,9 +25,12 @@ public final class Rocnikovka extends JavaPlugin implements CommandExecutor, Lis
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(!isOn) {
             Player player = (Player) sender;
-            player.sendMessage("Plugin se zapl");
+            player.sendMessage("Plugin se zapl. Napiš /storyenable, aby ses dozvěděl, co s těmi věcmi v tvém inventáři máš dělat");
             getServer().getPluginManager().registerEvents(new KoordinaceHrace(), this);
+            this.getCommand("storyEnable").setExecutor(new Story());
+            this.getCommand("reloadPlugin").setExecutor(new ReloadPlugin());
             getServer().getPluginManager().registerEvents(new FoundStronghold(),this);
+            getServer().getPluginManager().registerEvents(new TheEnd(),this);
             getServer().getPluginManager().registerEvents(new TeleportWhenEnemyHit(), this);
 
             isOn = true;

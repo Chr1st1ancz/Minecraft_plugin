@@ -8,6 +8,8 @@ import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import static org.bukkit.StructureType.STRONGHOLD;
 
@@ -43,10 +45,13 @@ public class KoordinaceHrace implements Listener {
                             player.sendMessage("Od strongholdu jsi " + Math.round(currlocation.distance(structure)) + " daleko.");
                         }
                         if(currlocation.distance(structure) < 100 && foundStronghold == false){
-                            player.sendMessage("Kopej! Je někde pod tebou");
+                            player.sendMessage("Ale ne, lidi tě chtějí zabít, aby mohli jít do tvého bunkru. Zabij je!");
                             foundStronghold = true;
                             Entity ent = player.getWorld().spawnEntity(player.getLocation(), EntityType.ZOMBIE);
                             ((Zombie) ent).setHealth(20);
+                            ent.setCustomName("Attacker " + 0);
+                            ent.setCustomNameVisible(true);
+                            ((Zombie) ent).addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 500, 10));
                         }
                     }
                 }
