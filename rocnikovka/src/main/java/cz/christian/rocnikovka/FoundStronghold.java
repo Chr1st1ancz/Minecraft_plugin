@@ -21,7 +21,7 @@ public class FoundStronghold implements Listener {
                 if (overallCount < 10) {
                     overallCount++;
                     Location currlocation = entity.getLocation();
-                    Entity ent = entity.getWorld().spawnEntity(entity.getLocation().add(5, entity.getWorld().getHighestBlockYAt((int) (currlocation.getX()+5),(int) currlocation.getY()+5), 5), EntityType.ZOMBIE);
+                    Entity ent = entity.getWorld().spawnEntity(entity.getLocation().add(2, (entity.getWorld().getHighestBlockYAt((int) (currlocation.getX()+2),(int) currlocation.getY()+2))+2, 2), EntityType.ZOMBIE);
                     ((Zombie) ent).setHealth(20);
                     ent.setCustomName("Attacker " + overallCount);
                     ent.setCustomNameVisible(true);
