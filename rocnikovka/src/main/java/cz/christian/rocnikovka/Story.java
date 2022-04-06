@@ -6,7 +6,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerEvent;
 
 import static org.bukkit.StructureType.STRONGHOLD;
 
@@ -14,6 +13,7 @@ public class Story implements CommandExecutor {
 
     private int countTime = 1;
     private int helperWithMin;
+    private int count = 0;
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -24,17 +24,7 @@ public class Story implements CommandExecutor {
         double finalTime = distance * 20 + 12000;
         double min = (finalTime / 20) / 60;
         helperWithMin = (int) min;
-
-        String text = ("Ale ne, atomové bomby byly svrženy na Evropu. Musíš se dostat do Strongholdu do " + Math.round(min) + " min, jinak tě radiace zabije. Cestou potkáš různé " +
-                "překážky a nebezpečí. Souřadnice Strongholdu nejsou známy, ale máš u sebe GPS lokátor, který ti do chatu bude vypisovat, pokud jsi se přiblížil. Štastnou cestu!");
-        try {
-            for (String s : text.split(" ")) {
-                Thread.sleep(500);
-                player.sendMessage(s);
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        mainStory();
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Rocnikovka.getInstance(), new Runnable() {
             @Override
             public void run() {
@@ -48,6 +38,23 @@ public class Story implements CommandExecutor {
 
         return true;
     }
+    public void mainStory(){
+        String[] text2 = {"Ale", "ne", "atomové", "bomby", "byly", "svrženy", "na", "Evropu.", "Musíš", "se", "dostat", "do", "Strongholdu", "do" + Math.round(helperWithMin) + " min,", "jinak", "tě", "radiace", "zabije.", "Cestou", "potkáš", "různé ",
+                "překážky", "a", "nebezpečí.", "Souřadnice", "Strongholdu", "nejsou", "známy,", "ale", "máš", "u", "sebe", "GPS", "lokátor,", "který", "ti", "do", "chatu", "bude", "vypisovat,", "pokud", "ses", "přiblížil.", "Štastnou", "cestu!"};
+            Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Rocnikovka.getInstance(), new Runnable() {
+                @Override
+                public void run() {
+                    Bukkit.broadcastMessage(text2[count]);
+                    count++;
+                    if(count < 45) {
+                        mainStory();
+                    }
+                }
+
+            }, 10);
+        }
+
+
 
     public void timer() {
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Rocnikovka.getInstance(), new Runnable() {

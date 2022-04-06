@@ -2,6 +2,7 @@ package cz.christian.rocnikovka;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -20,8 +21,11 @@ public class FoundStronghold implements Listener {
             if(entity.isCustomNameVisible()) {
                 if (overallCount < 10) {
                     overallCount++;
-                    Location currlocation = entity.getLocation();
-                    Entity ent = entity.getWorld().spawnEntity(entity.getLocation().add(2, (entity.getWorld().getHighestBlockYAt((int) (currlocation.getX()+2),(int) currlocation.getY()+2))+2, 2), EntityType.ZOMBIE);
+                    Location currlocation = killer.getLocation();
+                    Location newlocation = currlocation.add(Math.random() * 5, 0, Math.random() * 5);
+                    Block Yheight = killer.getWorld().getHighestBlockAt(newlocation);
+                    newlocation.setY(Yheight.getY() + 1);
+                    Entity ent = entity.getWorld().spawnEntity(newlocation, EntityType.ZOMBIE);
                     ((Zombie) ent).setHealth(20);
                     ent.setCustomName("Attacker " + overallCount);
                     ent.setCustomNameVisible(true);
