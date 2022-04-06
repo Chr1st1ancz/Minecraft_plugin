@@ -2,7 +2,6 @@ package cz.christian.rocnikovka;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.block.data.type.Switch;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,6 +13,7 @@ public class TheEnd implements Listener {
     public void endLogic(PlayerChangedWorldEvent event){
         if(!oneTimeTp) {
             //teleport do předem připravené místnosti
+            oneTimeTp = true;
             Player player = event.getPlayer();
             Location l = new Location(Bukkit.getWorld("world"), -529, 50, -83);
             player.teleport(l);
@@ -21,7 +21,6 @@ public class TheEnd implements Listener {
             Bukkit.reload();
             Bukkit.getServer().reloadData();
             player.sendMessage("Dohrál jsi!");
-            oneTimeTp = true;
         }
     }
 }
