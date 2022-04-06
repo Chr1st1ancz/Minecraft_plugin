@@ -19,9 +19,12 @@ public class KoordinaceHrace implements Listener {
    private Location tempLocation = null;
     @EventHandler
     public void whenPlayerMoves(PlayerMoveEvent event){
+        //inicializace
         Player player = event.getPlayer();
         Location currlocation = player.getLocation();
+        //lokace strongholdu
         Location structure = player.getWorld().locateNearestStructure(player.getLocation(), STRONGHOLD, 50000, true);
+       //podmínka, když se pohne hráč
         if((event.getTo().getX() != event.getFrom().getX()) && (event.getTo().getZ() != event.getFrom().getZ())) {
                  moving = moving+0.2;
                 if(moving > 50){
@@ -44,7 +47,8 @@ public class KoordinaceHrace implements Listener {
                         if(currlocation.distance(structure) > 100) {
                             player.sendMessage("Od strongholdu jsi " + Math.round(currlocation.distance(structure)) + " daleko.");
                         }
-                        if(currlocation.distance(structure) < 100 && foundStronghold == false){
+                        //když dojdeš do strongholdu, dál kod pokračuje v FoundStronghold
+                        if(currlocation.distance(structure) < 100 && !foundStronghold){
                             player.sendMessage("Ale ne, lidi tě chtějí zabít, aby mohli jít do tvého bunkru. Zabij je!");
                             foundStronghold = true;
                             Entity ent = player.getWorld().spawnEntity(player.getLocation(), EntityType.ZOMBIE);

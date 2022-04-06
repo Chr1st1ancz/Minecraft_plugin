@@ -1,11 +1,12 @@
 cz\christian\rocnikovka\Rocnikovka.class
-cz\christian\rocnikovka\Story$1.class
 cz\christian\rocnikovka\ReloadPlugin.class
-cz\christian\rocnikovka\TeleportWhenEnemyHit.class
 cz\christian\rocnikovka\InventorySetUp.class
 cz\christian\rocnikovka\FoundStronghold.class
-cz\christian\rocnikovka\Story$2.class
 cz\christian\rocnikovka\JoinEvent.class
 cz\christian\rocnikovka\Story.class
+cz\christian\rocnikovka\Story$1.class
+cz\christian\rocnikovka\TeleportWhenEnemyHit.class
+cz\christian\rocnikovka\Story$2.class
+cz\christian\rocnikovka\Story$3.class
 cz\christian\rocnikovka\TheEnd.class
 cz\christian\rocnikovka\KoordinaceHrace.class

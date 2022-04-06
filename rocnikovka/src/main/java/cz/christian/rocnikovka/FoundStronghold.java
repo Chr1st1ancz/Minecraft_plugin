@@ -15,12 +15,15 @@ public class FoundStronghold implements Listener {
     private boolean oneTimeMsg = false;
     @EventHandler
     public void entityDeath(EntityDeathEvent event) {
+        //inicializace
         Entity killer = event.getEntity().getKiller();
         Entity entity = event.getEntity();
+        //když hráč zabije entitu, která má nametag
         if (killer instanceof Player) {
             if(entity.isCustomNameVisible()) {
                 if (overallCount < 10) {
                     overallCount++;
+                    //logika spawnu zombika
                     Location currlocation = killer.getLocation();
                     Location newlocation = currlocation.add(Math.random() * 5, 0, Math.random() * 5);
                     Block Yheight = killer.getWorld().getHighestBlockAt(newlocation);

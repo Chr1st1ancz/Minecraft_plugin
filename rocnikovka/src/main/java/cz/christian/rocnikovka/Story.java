@@ -17,6 +17,7 @@ public class Story implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        //výpočet, kolik hráč bude potřebovat času
         Player player = (Player) sender;
         Location currlocation = player.getLocation();
         Location structure = player.getWorld().locateNearestStructure(player.getLocation(), STRONGHOLD, 50000, true);
@@ -25,6 +26,7 @@ public class Story implements CommandExecutor {
         double min = (finalTime / 20) / 60;
         helperWithMin = (int) min;
         mainStory();
+        //delayed task na reset celé hry. Když hráč nestihne dohrát včas. Natavené podle vzdálenosti od strongholdu (1 blok od SH 1 vteřina + 10 min)
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Rocnikovka.getInstance(), new Runnable() {
             @Override
             public void run() {
@@ -38,6 +40,7 @@ public class Story implements CommandExecutor {
 
         return true;
     }
+    //main story po zadání příkazu /storyenable
     public void mainStory(){
         String[] text2 = {"Ale", "ne", "atomové", "bomby", "byly", "svrženy", "na", "Evropu.", "Musíš", "se", "dostat", "do", "Strongholdu", "do" + Math.round(helperWithMin) + " min,", "jinak", "tě", "radiace", "zabije.", "Cestou", "potkáš", "různé ",
                 "překážky", "a", "nebezpečí.", "Souřadnice", "Strongholdu", "nejsou", "známy,", "ale", "máš", "u", "sebe", "GPS", "lokátor,", "který", "ti", "do", "chatu", "bude", "vypisovat,", "pokud", "ses", "přiblížil.", "Štastnou", "cestu!"};
@@ -55,7 +58,7 @@ public class Story implements CommandExecutor {
         }
 
 
-
+//každou minutu vypisuje, kolik ti zbývá času
     public void timer() {
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Rocnikovka.getInstance(), new Runnable() {
             @Override

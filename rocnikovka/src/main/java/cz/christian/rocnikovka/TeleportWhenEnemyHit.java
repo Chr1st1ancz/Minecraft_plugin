@@ -8,8 +8,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import cz.christian.rocnikovka.KoordinaceHrace;
-import org.bukkit.scheduler.BukkitTask;
 
 import static org.bukkit.StructureType.STRONGHOLD;
 
@@ -19,11 +17,13 @@ public class TeleportWhenEnemyHit implements Listener {
     private boolean oneTimeMsg = false;
     @EventHandler
     public void onPlayerDamage(EntityDamageByEntityEvent event) {
+        //definice entity, hráče a lokace
         Entity entity = event.getEntity();
         Player player = (Player) event.getEntity();
         Location currlocation = player.getLocation();
         Location structure = player.getWorld().locateNearestStructure(player.getLocation(), STRONGHOLD, 50000, true);
         if (currlocation.distance(structure) > 120 && !oneTimeMsg) {
+            //když enemy hitne hráče, hráč se teleportuje
             if (entity instanceof Player) {
                 Location newlocation = currlocation.add(Math.random() * 100, 0, Math.random() * 100);
                 Block Yheight = player.getWorld().getHighestBlockAt(newlocation);
@@ -37,8 +37,6 @@ public class TeleportWhenEnemyHit implements Listener {
                 }
 
 
-            } else if(event.getDamager() instanceof Player) {
-                Bukkit.getServer().getConsoleSender().sendMessage("Hráč hitl enemy");
             }
 
         }
