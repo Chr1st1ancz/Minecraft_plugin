@@ -1,6 +1,6 @@
 name: Rocnikovka
 version: '1.0'
-main: cz.christian.rocnikovka.Rocnikovka
+main: cz.christian.rocnikovka.Main
 api-version: 1.18
 
 commands:

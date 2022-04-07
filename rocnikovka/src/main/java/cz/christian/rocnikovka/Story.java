@@ -27,7 +27,7 @@ public class Story implements CommandExecutor {
         helperWithMin = (int) min;
         mainStory();
         //delayed task na reset celé hry. Když hráč nestihne dohrát včas. Natavené podle vzdálenosti od strongholdu (1 blok od SH 1 vteřina + 10 min)
-        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Rocnikovka.getInstance(), new Runnable() {
+        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
             @Override
             public void run() {
                 player.teleport(Bukkit.getServer().getWorld("world").getSpawnLocation());
@@ -35,22 +35,25 @@ public class Story implements CommandExecutor {
                 Bukkit.getServer().reloadData();
                 player.sendMessage("Nestihl jsi dojít do " + Math.round(min) + " min do Strongholdu :(, pokud to chceš zkusit znovu, napiš /pluginenable");
             }
-        }, (long) finalTime);// 20 L == 1 sec
+        },(helperWithMin* 20L)*60);// 20 L == 1 sec
         timer();
 
         return true;
     }
     //main story po zadání příkazu /storyenable
     public void mainStory(){
-        String[] text2 = {"Ale", "ne", "atomové", "bomby", "byly", "svrženy", "na", "Evropu.", "Musíš", "se", "dostat", "do", "Strongholdu", "do" + Math.round(helperWithMin) + " min,", "jinak", "tě", "radiace", "zabije.", "Cestou", "potkáš", "různé ",
+        String[] text2 = {"Ale", "ne", "atomové", "bomby", "byly", "svrženy", "na", "Evropu.", "Musíš", "se", "dostat", "do", "Strongholdu", "do " + helperWithMin + " min,", "jinak", "tě", "radiace", "zabije.", "Cestou", "potkáš", "různé ",
                 "překážky", "a", "nebezpečí.", "Souřadnice", "Strongholdu", "nejsou", "známy,", "ale", "máš", "u", "sebe", "GPS", "lokátor,", "který", "ti", "do", "chatu", "bude", "vypisovat,", "pokud", "ses", "přiblížil.", "Štastnou", "cestu!"};
-            Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Rocnikovka.getInstance(), new Runnable() {
+            Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
                 @Override
                 public void run() {
                     Bukkit.broadcastMessage(text2[count]);
                     count++;
                     if(count < 45) {
                         mainStory();
+                        if(count == 45){
+                            count = 0;
+                        }
                     }
                 }
 
@@ -60,7 +63,7 @@ public class Story implements CommandExecutor {
 
 //každou minutu vypisuje, kolik ti zbývá času
     public void timer() {
-        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Rocnikovka.getInstance(), new Runnable() {
+        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
             @Override
             public void run() {
                 Bukkit.broadcastMessage("Zbývá ti " + (Math.round(helperWithMin) - countTime) + " minut.");

@@ -43,7 +43,7 @@ public class FoundStronghold implements Listener {
                 }
                 if (overallCount > 10 && !oneTimeMsg) {
                     oneTimeMsg = true;
-                    Bukkit.broadcastMessage("Zabil jsi všechny, rychle, zakopej se do Strongholdu, najdi portál, vyplň je perlami a skoč do něj.");
+                    Bukkit.broadcastMessage("Zabil jsi všechny!. Rychle, zakopej se do Strongholdu, najdi portál, vyplň ho perlami a skoč do něj.");
                 }
             }
         }

@@ -7,10 +7,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class Rocnikovka extends JavaPlugin implements CommandExecutor, Listener {
+public final class Main extends JavaPlugin implements CommandExecutor, Listener {
 
     private boolean isOn = false;
-    private static Rocnikovka instance;
+    private static Main instance;
     @Override
             public void onEnable(){
         instance = this;
@@ -18,7 +18,7 @@ public final class Rocnikovka extends JavaPlugin implements CommandExecutor, Lis
         getServer().getPluginManager().registerEvents(new JoinEvent(), this);
         getServer().getPluginManager().registerEvents(new InventorySetUp(),this);
     }
-    public static Rocnikovka getInstance(){
+    public static Main getInstance(){
         return instance;
     }
     @Override
@@ -26,7 +26,7 @@ public final class Rocnikovka extends JavaPlugin implements CommandExecutor, Lis
         if(!isOn) {
             Player player = (Player) sender;
             player.sendMessage("Plugin se zapl. Napiš /storyenable, aby ses dozvěděl, co s těmi věcmi v tvém inventáři máš dělat");
-            getServer().getPluginManager().registerEvents(new KoordinaceHrace(), this);
+            getServer().getPluginManager().registerEvents(new PlayerMovement(), this);
             this.getCommand("storyEnable").setExecutor(new Story());
             this.getCommand("reloadPlugin").setExecutor(new ReloadPlugin());
             getServer().getPluginManager().registerEvents(new FoundStronghold(),this);
