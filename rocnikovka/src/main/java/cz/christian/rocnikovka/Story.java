@@ -33,7 +33,7 @@ public class Story implements CommandExecutor {
                 player.teleport(Bukkit.getServer().getWorld("world").getSpawnLocation());
                 Bukkit.reload();
                 Bukkit.getServer().reloadData();
-                player.sendMessage("Nestihl jsi dojít do " + Math.round(min) + " min do Strongholdu :(, pokud to chceš zkusit znovu, napiš /pluginenable");
+                player.sendMessage("Nestihl jsi dojít do " + helperWithMin + " min do Strongholdu :(, pokud to chceš zkusit znovu, napiš /pluginenable");
             }
         },(helperWithMin* 20L)*60);// 20 L == 1 sec
         timer();
